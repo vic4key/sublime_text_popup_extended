@@ -70,7 +70,7 @@ def _SLT_hooking_function_show_popup(self, content, flags=0, location=-1,
 
 # Listener - Mouse Hover
 
-class _SLT_EventListener(sublime_plugin.EventListener):
+class EventListener(sublime_plugin.EventListener):
   def on_hover(self, view, point, hover_zone):
     if not view.is_popup_visible():
         my_content  = ""
