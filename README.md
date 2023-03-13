@@ -1,7 +1,7 @@
 # Sublime Text Popup Extended
 Extends the SLT's default pop-up for adding our content without override by a new one.
 
-#### Usage
+### Usage
 
 Go to `Sublime Text X\Data\Packages\User\`
 ```
@@ -29,9 +29,9 @@ def plugin_loaded():
         fn_on_navigate=my_on_navigate)
 ```
 
-#### Screenshots
+### Screenshots
 
 ![](sample.png)
 
-#### Contact
+### Contact
 Feel free to contact via [Twitter](https://twitter.com/vic4key) / [Gmail](mailto:vic4key@gmail.com) / [Blog](https://blog.vic.onl/) / [Website](https://vic.onl/)
