@@ -3,12 +3,7 @@ Extends the SLT's default pop-up for adding our content without override by a ne
 
 ### Usage
 
-Go to `Sublime Text X\Data\Packages\User\`
-```
-git submodule add --force https://github.com/vic4key/sublime_text_popup_extended.git
-```
-
-Create a SLT plugin and use the following sample codes
+Get [sublime_text_popup_extended](https://github.com/vic4key/sublime_text_popup_extended.git) as a sub-module in your plugin's folder, and use the following sample codes
 ```python
 from .sublime_text_popup_extended import *
 
