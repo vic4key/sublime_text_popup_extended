@@ -21,10 +21,16 @@ _SLT_POPUP_STYLE = '''
 
 _SLT_title_text = None
 _SLT_fn_on_navigate = None
+_SLT_fn_on_navigate_showable = None
 _SLT_fn_on_popup_content = None
 
 def _SLT_default_on_navigate(href) -> None:
     print("href = '%s'" % href)
+
+def _SLT_default_on_navigate_showable(view, point) -> bool:
+    word = view.substr(view.word(point))
+    word = word.strip()
+    return len(word) > 0
 
 def _SLT_hooking_function_on_navigate(href) -> None:
     '''
@@ -35,6 +41,7 @@ def _SLT_hooking_function_on_navigate(href) -> None:
 def _SLT_default_fn_popup_content(view, point) -> list:
     result = []
     word = view.substr(view.word(point))
+    word = word.strip()
     text = "No additional information for '%s'" % word
     result.append(text)
     return result
@@ -72,7 +79,7 @@ def _SLT_hooking_function_show_popup(self, content, flags=0, location=-1,
 
 class EventListener(sublime_plugin.EventListener):
   def on_hover(self, view, point, hover_zone):
-    if not view.is_popup_visible():
+    if not view.is_popup_visible() and _SLT_fn_on_navigate_showable(view, point):
         my_content  = ""
         my_content += "<body id=show-definitions>"
         my_content += _SLT_POPUP_STYLE
@@ -84,7 +91,7 @@ class EventListener(sublime_plugin.EventListener):
 
 # Setup - The public function
 
-def setup(heading_text = None, fn_popup_content = None, fn_on_navigate = None):
+def setup(heading_text = None, fn_popup_content = None, fn_on_navigate = None, fn_on_navigate_showable = None):
     '''
     Setup to extend the sublime text's default pop-up.
     :param heading_text: The heading text.
@@ -95,6 +102,8 @@ def setup(heading_text = None, fn_popup_content = None, fn_on_navigate = None):
     _SLT_title_text = "<h1>%s</h1>" % (heading_text if heading_text else _SLT_POPUP_TITLE)
     global _SLT_fn_on_navigate
     _SLT_fn_on_navigate = fn_on_navigate if fn_on_navigate else _SLT_default_on_navigate
+    global _SLT_fn_on_navigate_showable
+    _SLT_fn_on_navigate_showable = fn_on_navigate_showable if fn_on_navigate_showable else _SLT_default_fn_popup_content
     global _SLT_fn_on_popup_content
     _SLT_fn_on_popup_content = fn_popup_content if fn_popup_content else _SLT_default_fn_popup_content
     View.show_popup = _SLT_hooking_function_show_popup # hook the class method 'View.show_popup'
