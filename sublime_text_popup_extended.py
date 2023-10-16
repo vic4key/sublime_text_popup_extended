@@ -103,7 +103,7 @@ def setup(heading_text = None, fn_popup_content = None, fn_on_navigate = None, f
     global _SLT_fn_on_navigate
     _SLT_fn_on_navigate = fn_on_navigate if fn_on_navigate else _SLT_default_on_navigate
     global _SLT_fn_on_navigate_showable
-    _SLT_fn_on_navigate_showable = fn_on_navigate_showable if fn_on_navigate_showable else _SLT_default_fn_popup_content
+    _SLT_fn_on_navigate_showable = fn_on_navigate_showable if fn_on_navigate_showable else _SLT_default_on_navigate_showable
     global _SLT_fn_on_popup_content
     _SLT_fn_on_popup_content = fn_popup_content if fn_popup_content else _SLT_default_fn_popup_content
     View.show_popup = _SLT_hooking_function_show_popup # hook the class method 'View.show_popup'
